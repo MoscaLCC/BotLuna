@@ -377,3 +377,8 @@ class autoBot():
                     text = x['message']['text']
                     sender_id = x['sender']['id']
             return (sender_id, text)
+    
+    def analisa_mensagem(self, cliente, message_object, thread_id, thread_type):
+	    resp = ""
+	    mensagem = str(message_object.text);resp = bot.thinkfb(mensagem)
+	    return cliente.send(Message(resp), thread_id=thread_id, thread_type=thread_type)
