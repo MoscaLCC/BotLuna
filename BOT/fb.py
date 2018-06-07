@@ -14,6 +14,15 @@ bot = autoBot('LUNA')
 regex = Regex(bot)
 bot.addRegex(regex)
 bot.start()
+bot.training()
+
+def analisa_mensagem(cliente, message_object, thread_id, thread_type):
+	resp = ""
+	mensagem = str(message_object.text)
+	print(mensagem)
+	resp = bot.thinkfb(mensagem)
+	print(resp)
+	return cliente.send(Message(resp), thread_id=thread_id, thread_type=thread_type)
 
 
 class EchoBot(Client):
@@ -25,7 +34,7 @@ class EchoBot(Client):
 		log.info("{} from {} in {}".format(message_object, thread_id, thread_type.name))
 		
 		if author_id != self.uid:
-			bot.analisa_mensagem(self, message_object, thread_id, thread_type)
+			analisa_mensagem(self, message_object, thread_id, thread_type)
 
 
 client = EchoBot("luismarqueslcc@gmail.com", "Botspln2018")
